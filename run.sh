@@ -1,11 +1,11 @@
-torchrun --nproc_per_node=1 \
+torchrun --nproc_per_node=4 \
         instruction_tuning.py \
         --model_name_or_path "EleutherAI/gpt-neo-2.7B" \
         --data_path ./datasets/TeleQnA.json \
         --bf16 True \
         --output_dir ./output_GPT_NEO_2.7B/ \
         --num_train_epochs 2 \
-        --per_device_train_batch_size 1 \
+        --per_device_train_batch_size 4 \
         --per_device_eval_batch_size 1\
         --gradient_accumulation_steps 1 \
         --evaluation_strategy "no" \
