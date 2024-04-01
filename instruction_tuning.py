@@ -132,6 +132,8 @@ class SupervisedDataset(Dataset):
 
         if ".json" in data_path:
             list_data_dict = jload(data_path)
+            list_data_dict = list_data_dict[:int(0.8 * len(list_data_dict))]
+            print(len(list_data_dict))
             for i in range(len(list_data_dict)):
                 for k, v in list_data_dict[i].items():
                     if isinstance(v, str):
@@ -143,7 +145,7 @@ class SupervisedDataset(Dataset):
         sources = [PROMPT.format_map(example) for example in list_data_dict]
 
         targets = [
-            f"{example['answer']}{example['explanation']}{tokenizer.eos_token}" for example in list_data_dict
+            "The correct option is {}.\nTherefore the correct answer is {}.\nExplanation for my answer is: {}{}".format(example['answer'].split(":")[0], example['answer'].split(":")[1], example['explanation'], tokenizer.eos_token) for example in list_data_dict
         ]
 
 
