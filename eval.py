@@ -103,6 +103,8 @@ def jload(f, mode="r"):
 def extract_answer_with_regular_expression(text):
     pattern = r"The correct option is option (\d+)"
     match = re.search(pattern, text)
+    if match is None:
+        return "0"
     return match.group(1)
 
 
