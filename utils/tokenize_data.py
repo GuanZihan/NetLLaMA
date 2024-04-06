@@ -38,9 +38,9 @@ def tokenize_data(input_path="", model_name="baffo32/decapoda-research-llama-7B-
     df = pd.read_csv(input_path)
 
     all_tokenized = []
-    text_name = ['question', 'option 1', 'option 2', 'option 3', 'option 4']
+    text_name = ['question', 'option_1', 'option_2', 'option_3', 'option_4']
 
-    all_tokenized = df[text_name].sample(frac=1).parallel_map(tokenizer.encode)
+    all_tokenized = df[text_name].sample(frac=1).parallel_apply(tokenizer.encode)
     print(f"Total number of tokens if {all_tokenized.str.len().sum()}")
 
     all_tokens = [1] + [
